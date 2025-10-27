@@ -1,0 +1,4 @@
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   /home/himax/code/rektoff_hands_on/svm_overview/program/Cargo.toml
+workspace: /home/himax/code/rektoff_hands_on/svm_overview/Cargo.toml
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s
