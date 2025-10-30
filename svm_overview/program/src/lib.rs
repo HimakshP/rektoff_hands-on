@@ -37,7 +37,10 @@ pub fn using_transmute() -> ProgramResult{
     };
 
     msg!("number is {}, its hex is {:x}", num, num);
-
+/// this function is used to transfer the raw values of any data into another handle,
+/// provided that the size of both the source and destination data type is same.
+/// this is already checked in safe rust but in unsafe the developer should mannually
+/// verify this.
     
     Ok(())
 }
