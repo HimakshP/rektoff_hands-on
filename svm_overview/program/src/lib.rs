@@ -28,22 +28,7 @@ pub fn process_instruction(
         return Ok(());
     }
 
-pub fn using_transmute() -> ProgramResult{
-    let raw_bytes = [0x78, 0x56, 0x34, 0x12];
-    msg!("raw bytes were: 0x78, 0x56, 0x34, 0x12");
 
-    let num: u32 = unsafe {
-    std::mem::transmute::<[u8; 4], u32>(raw_bytes)
-    };
-
-    msg!("number is {}, its hex is {:x}", num, num);
-/// this function is used to transfer the raw values of any data into another handle,
-/// provided that the size of both the source and destination data type is same.
-/// this is already checked in safe rust but in unsafe the developer should mannually
-/// verify this.
-    
-    Ok(())
-}
 
     match instruction_data[0] {
         0 => log_memory_regions(instruction_data),
@@ -118,5 +103,39 @@ fn attempt_buffer_overflow() -> ProgramResult {
     msg!("buffer: {:?}", buffer);
     msg!("not_in_buffer: {}", not_in_buffer);
 
+    Ok(())
+}
+
+
+pub fn using_transmute() -> ProgramResult{
+    let raw_bytes = [0x78, 0x56, 0x34, 0x12];
+    msg!("raw bytes were: 0x78, 0x56, 0x34, 0x12");
+
+    let num: u32 = unsafe {
+    std::mem::transmute::<[u8; 4], u32>(raw_bytes)
+    };
+
+    msg!("number is {}, its hex is {:x}", num, num);
+/// this function is used to transfer the raw values of any data into another handle,
+/// provided that the size of both the source and destination data type is same.
+/// this is already checked in safe rust but in unsafe the developer should mannually
+/// verify this.
+    
+    Ok(())
+}
+
+
+pub fn verify_account_data_boundary() -> ProgramResult {
+    pub struct Large_Struct {
+        pub serial: u128,
+        pub name_vec: Vec<String>,
+        pub achievements: [u64 ; 200]
+    }
+
+    pub struct Small_Struct {
+        pub house_no: u8,
+        pub grade: char,
+        pub goals: u64
+    }
     Ok(())
 }
