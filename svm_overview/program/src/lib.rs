@@ -35,6 +35,7 @@ pub fn process_instruction(
         1 => attempt_uaf(),
         2 => attempt_buffer_overflow(),
         3 => using_transmute(),
+        4 => ownership_testing(),
         _ => Err(ProgramError::InvalidInstructionData),
     }
 }
@@ -116,10 +117,10 @@ pub fn using_transmute() -> ProgramResult{
     };
 
     msg!("number is {}, its hex is {:x}", num, num);
-/// this function is used to transfer the raw values of any data into another handle,
-/// provided that the size of both the source and destination data type is same.
-/// this is already checked in safe rust but in unsafe the developer should mannually
-/// verify this.
+// this function is used to transfer the raw values of any data into another handle,
+// provided that the size of both the source and destination data type is same.
+// this is already checked in safe rust but in unsafe the developer should mannually
+// verify this.
     
     Ok(())
 }
@@ -136,6 +137,21 @@ pub fn verify_account_data_boundary() -> ProgramResult {
         pub house_no: u8,
         pub grade: char,
         pub goals: u64
+    }
+    Ok(())
+}
+
+pub fn ownership_testing() -> ProgramResult {
+    let mut retard = Box::new('r');
+    let down = &retard;
+    let crack = &mut retard;
+    *crack = Box::new('k');
+    msg!("retard: {}", retard);
+    msg!("down: {}", down);
+    msg!("crack: {}", crack);
+    {
+        let beta = &retard;
+        msg!("beta {}", beta);
     }
     Ok(())
 }

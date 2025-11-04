@@ -156,6 +156,8 @@ describe("PDA Collision Vulnerability", () => {
       console.log("Error:", error);
       console.log("Protection confirmed: Withdrawal failed due to discriminator protection");
     }
+
+    it_("should simulate dos attack")
     
     // Vulnerability Analysis
     console.log("\n=== VULNERABILITY ANALYSIS ===");

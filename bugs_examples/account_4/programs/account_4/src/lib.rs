@@ -122,7 +122,7 @@ pub mod account_4 {
             ],
             bump
         )]
-        pub vault_authority: Account<'info, VaultAuthority>,
+        pub vault_authority: Account<'info, VaultAuthority>, // this has similar seeds as InitializeCollectionAuthority
         #[account(mut)]
         pub user: Signer<'info>,
     }

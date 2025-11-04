@@ -32,7 +32,7 @@ fn main() -> Result<()> {
     let instruction = Instruction {
         program_id,
         accounts: vec![],
-        data: vec![3],
+        data: vec![4],
     };
 
     // Create message and transaction
