@@ -65,47 +65,6 @@ describe("bugs-slowmist", () => {
     const bob_as_authority = await program.methods.logIt().accounts({authority: bob.publicKey}).rpc();
     await showProgramLogs(bob_as_authority, "bob messaged as authority");
 
-
-  //  it("alice logs her message", async () => {
-  // // Create a new provider with Alice as the wallet
-  // const aliceProvider = new anchor.AnchorProvider(
-  //   provider.connection,
-  //   new anchor.Wallet(alice),
-  //   { commitment: "confirmed" }
-  // );
-  // const aliceProgram = new anchor.Program(
-  //   program.idl,
-  //   program.programId,
-  //   aliceProvider
-  // );
-
-  // console.log("Alice messages as authority");
-  // const alice_as_authority = await aliceProgram.methods.logIt()
-  //   .accounts({ authority: alice.publicKey })
-  //   .rpc();
-
-  // await showProgramLogs(alice_as_authority, "Alice messaged");
-
-  // // Create a new provider with Bob as the wallet
-  // const bobProvider = new anchor.AnchorProvider(
-  //   provider.connection,
-  //   new anchor.Wallet(bob),
-  //   { commitment: "confirmed" }
-  // );
-  // const bobProgram = new anchor.Program(
-  //   program.idl,
-  //   program.programId,
-  //   bobProvider
-  // );
-
-  // // Bob can impersonate Alice due to missing Signer constraint
-  // console.log("Bob impersonates Alice (vulnerability demonstration)");
-  // const bob_as_authority = await bobProgram.methods.logIt()
-  //   .accounts({ authority: alice.publicKey })  // Bob uses Alice's pubkey
-  //   .rpc();  // But Bob's wallet signs it
-
-  await showProgramLogs(bob_as_authority, "Bob impersonated Alice");
-
   console.log("VULNERABILITY PROVEN: Bob successfully used Alice's pubkey without her signature!");
 });
 });
