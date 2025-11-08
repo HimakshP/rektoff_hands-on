@@ -11,17 +11,16 @@ pub mod bugs_slowmist {
 //_____________________________________________________________________________________________________________________
 
 //missing signer 
-    pub fn log_message(ctx: Context<LogMessage>) -> ProgramResult {
-        msg!("Bob: {}", ctx.accounts.authority.key().to_string());
+    pub fn log_it(ctx: Context<LogIt>) -> ProgramResult {
+        msg!("authority- Bob: {}", ctx.accounts.authority.key().to_string());
         Ok(())
     }
-}
 
 #[derive(Accounts)]
-pub struct LogMessage<'info> {
+pub struct LogIt<'info> {
     /// CHECK: TESTING
     authority: AccountInfo<'info>
 }
-
+}
 //_____________________________________________________________________________________________________________________
 //paste snippets above ⇈⇈⇈⇈⇈
