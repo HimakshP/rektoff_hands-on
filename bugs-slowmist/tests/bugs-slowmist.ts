@@ -100,7 +100,7 @@ it("should pass when bob is the owner of alice's token", async () => {
     .signers([alice])
     .rpc();
 
-  await showProgramLogs(aliceTxn, "Alice messaged");
+  await showProgramLogs(aliceTxn,"Program log:Alice messaged");
 
   console.log("Bob tries to own alice's coin");
   const bobTxn = await program.methods.logMessage().accounts({
@@ -108,6 +108,8 @@ it("should pass when bob is the owner of alice's token", async () => {
     authority: alice.publicKey})                             //alice is the authority
     .signers([alice])
     .rpc();     
+
+    await showProgramLogs(bobTxn,"Program log:Bob messaged");
 }
 
 

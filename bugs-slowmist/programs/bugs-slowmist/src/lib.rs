@@ -29,7 +29,7 @@ pub mod bugs_slowmist {
 pub fn log_message(ctx: Context<LogMessage>) -> Result<()> {
         let data = ctx.accounts.token.try_borrow_data()?;
         let token = SplTokenAccount::unpack(&data);
-        msg!("Your account balance is: {}", token.unwrap().amount);
+        msg!("Your account owner is {} ", token.unwrap().owner);
         Ok(())
     }
 }
