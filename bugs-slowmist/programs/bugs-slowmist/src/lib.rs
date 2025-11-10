@@ -8,6 +8,8 @@ declare_id!("oHFNy1n397F1JvQUaYeg7zPNYYnUMHZGQFohx4Zz7Eg");
 #[program]
 pub mod bugs_slowmist {
     
+    use anchor_lang::prelude::entrypoint::ProgramResult;
+
     use super::*;
 // paste snippet below ⇊⇊⇊⇊⇊
 //_____________________________________________________________________________________________________________________
@@ -26,19 +28,20 @@ pub mod bugs_slowmist {
 
 
 //account data matching
-pub fn log_message(ctx: Context<LogMessage>) -> Result<()> {
-        let data = ctx.accounts.token.try_borrow_data()?;
-        let token = SplTokenAccount::unpack(&data);
-        msg!("Your account owner is {} ", token.unwrap().owner);
+pub fn log_message(ctx: Context<LogMessage>) -> ProgramResult {
+        let token = SplTokenAccount::unpack(&ctx.accounts.token.data.borrow())?;
+        if ctx.accounts.authority.key != &token.owner {
+            return Err(ProgramError::InvalidAccountData);
+        }
+        msg!("Your account owner is: {}", token.owner);
         Ok(())
     }
-}
 
 #[derive(Accounts)]
 pub struct LogMessage<'info> {
     /// CHECK: TESTING
     token: AccountInfo<'info>,
     authority: Signer<'info>,
-}
+}}
 //_____________________________________________________________________________________________________________________
 //paste snippets above ⇈⇈⇈⇈⇈

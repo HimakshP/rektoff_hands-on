@@ -81,36 +81,37 @@ describe("bugs-slowmist", async () => {
 
 
 //account owner uunspecified
-it("should pass when bob is the owner of alice's token", async () => {
-  //for alice 
-  mint = await Token.createMint(
-            Connection,
-            payer,
-            mintAuthority.publicKey,
-            null, // Freeze authority
-            9,    // Decimals
-            TOKEN_PROGRAM_ID
-        );
+// it("should pass when bob is the owner of alice's token", async () => {
+//   //for alice 
+//   mint = await Token.createMint(
+//             Connection,
+//             payer,
+//             mintAuthority.publicKey,
+//             null, // Freeze authority
+//             9,    // Decimals
+//             TOKEN_PROGRAM_ID
+//         );
   
-  console.log("Alice logs her token account balance-");
+//   console.log("Alice logs her token account balance-");
 
-  const aliceTxn = await program.methods.logMessage().accounts({
-    token: await mint.createAccount(alice.publicKey), 
-    authority: alice.publicKey})
-    .signers([alice])
-    .rpc();
+//   const aliceTxn = await program.methods.logMessage().accounts({
+//     token: await mint.createAccount(alice.publicKey), 
+//     authority: alice.publicKey})
+//     .signers([alice])
+//     .rpc();
 
-  await showProgramLogs(aliceTxn,"Program log:Alice messaged");
+//   await showProgramLogs(aliceTxn,"Program log:Alice messaged");
 
-  console.log("Bob tries to own alice's coin");
-  const bobTxn = await program.methods.logMessage().accounts({
-    token: await mint.createAccount(bob.publicKey),          //bob is the owner 
-    authority: alice.publicKey})                             //alice is the authority
-    .signers([alice])
-    .rpc();     
+//   console.log("Bob tries to own alice's coin");
+//   const bobTxn = await program.methods.logMessage().accounts({
+//     token: await mint.createAccount(bob.publicKey),          //bob is the owner 
+//     authority: alice.publicKey})                             //alice is the authority
+//     .signers([alice])
+//     .rpc();     
 
-    await showProgramLogs(bobTxn,"Program log:Bob messaged");
-}
+//     await showProgramLogs(bobTxn,"Program log:Bob messaged");
+// }
 
 
-)});
+// )
+});
